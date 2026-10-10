@@ -1,80 +1,38 @@
-document.addEventListener("DOMContentLoaded", () => {
+const form = document.getElementById("rsvpForm");
+const success = document.getElementById("successMessage");
+const copyIban = document.getElementById("copyIban");
+const copyFeedback = document.getElementById("copyFeedback");
 
-    /* =========================
-       REVEAL ANIMATIONS
-    ========================= */
+form?.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-    const revealElements = document.querySelectorAll(".reveal");
+  // DEMO: il backend RSVP non è ancora collegato.
+  // Quando scegliamo il servizio (es. Formspree/Basin/endpoint serverless),
+  // sostituiamo questo blocco con l'invio reale.
+  form.querySelectorAll("input, select, textarea, button").forEach((el) => {
+    el.disabled = true;
+  });
 
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        {
-            threshold: 0.12
-        }
-    );
+  success.hidden = false;
+  success.scrollIntoView({ behavior: "smooth", block: "center" });
+});
 
-    revealElements.forEach((element) => {
-        observer.observe(element);
+document.querySelectorAll(".faq details").forEach((detail) => {
+  detail.addEventListener("toggle", () => {
+    if (!detail.open) return;
+    document.querySelectorAll(".faq details").forEach((other) => {
+      if (other !== detail) other.open = false;
     });
+  });
+});
 
-
-    /* =========================
-       RSVP DEMO
-    ========================= */
-
-    const form = document.getElementById("rsvp-form");
-    const success = document.getElementById("rsvp-success");
-
-    if (form && success) {
-
-        form.addEventListener("submit", (event) => {
-
-            event.preventDefault();
-
-            form.style.display = "none";
-            success.hidden = false;
-
-            success.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-        });
-
-    }
-
-
-    /* =========================
-       FAQ
-    ========================= */
-
-    const faqItems = document.querySelectorAll("details");
-
-    faqItems.forEach((item) => {
-
-        item.addEventListener("toggle", () => {
-
-            if (item.open) {
-
-                faqItems.forEach((other) => {
-
-                    if (other !== item) {
-                        other.removeAttribute("open");
-                    }
-
-                });
-
-            }
-
-        });
-
-    });
-
+copyIban?.addEventListener("click", async () => {
+  const iban = copyIban.dataset.iban;
+  try {
+    await navigator.clipboard.writeText(iban);
+    copyFeedback.textContent = "IBAN copiato.";
+  } catch {
+    copyFeedback.textContent = "Seleziona e copia l'IBAN manualmente.";
+  }
+  window.setTimeout(() => (copyFeedback.textContent = ""), 2500);
 });
