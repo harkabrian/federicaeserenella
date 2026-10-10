@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Federica & Serenella</title>
+
+    <meta
+        name="description"
+        content="Il matrimonio di Federica & Serenella"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <header class="hero">
+
+        <div class="hero-flower flower-left">✿</div>
+        <div class="hero-flower flower-right">❀</div>
+
+        <div class="hero-content">
+
+            <p class="eyebrow">IL NOSTRO GIORNO</p>
+
+            <h1>
+                Federica
+                <span>&</span>
+                Serenella
+            </h1>
+
+            <p class="date">21 · 06 · 2027</p>
+
+            <div class="hero-divider"></div>
+
+            <p class="scroll-text">
+                Scorri per scoprire
+            </p>
+
+            <div class="scroll-arrow">↓</div>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- INTRO -->
+        <section class="intro reveal">
+
+            <div class="botanical">❧</div>
+
+            <p class="section-label">CON AMORE</p>
+
+            <h2>
+                Due persone,<br>
+                una promessa,<br>
+                un giorno da ricordare.
+            </h2>
+
+            <p class="intro-text">
+                Siamo felici di condividere con voi
+                uno dei giorni più importanti della nostra vita.
+            </p>
+
+            <div class="botanical botanical-bottom">❧</div>
+
+        </section>
+
+
+        <!-- PHOTO PLACEHOLDER -->
+        <section class="photo-section reveal">
+
+            <div class="photo-placeholder">
+                <span>La nostra storia</span>
+            </div>
+
+        </section>
+
+
+        <!-- DATE -->
+        <section class="date-section reveal">
+
+            <p class="section-label">SEGNATE LA DATA</p>
+
+            <div class="big-date">
+                <span>21</span>
+
+                <div>
+                    <strong>GIUGNO</strong>
+                    <small>2027</small>
+                </div>
+            </div>
+
+            <p class="day">SABATO</p>
+
+        </section>
+
+
+        <!-- PROGRAMMA -->
+        <section class="schedule reveal">
+
+            <p class="section-label">IL GRANDE GIORNO</p>
+
+            <h2>Programma</h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-time">15:30</div>
+
+                    <div class="timeline-content">
+                        <span class="timeline-icon">♡</span>
+                        <h3>Cerimonia</h3>
+                        <p>
+                            Chiesa / location della cerimonia
+                        </p>
+                        <a href="#" class="text-link">
+                            Come arrivare →
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-time">17:00</div>
+
+                    <div class="timeline-content">
+                        <span class="timeline-icon">✿</span>
+                        <h3>Aperitivo</h3>
+                        <p>
+                            La location del ricevimento
+                        </p>
+                        <a href="#" class="text-link">
+                            Come arrivare →
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-time">20:00</div>
+
+                    <div class="timeline-content">
+                        <span class="timeline-icon">☼</span>
+                        <h3>Cena</h3>
+                        <p>
+                            Una serata da condividere insieme.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-time">22:30</div>
+
+                    <div class="timeline-content">
+                        <span class="timeline-icon">♫</span>
+                        <h3>Party</h3>
+                        <p>
+                            Dopo cena si balla.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RSVP -->
+        <section class="rsvp reveal">
+
+            <div class="rsvp-card">
+
+                <p class="section-label">RSVP</p>
+
+                <h2>Ci sarai?</h2>
+
+                <p>
+                    La vostra presenza è il regalo più bello.
+                    Fateci sapere se sarete con noi.
+                </p>
+
+                <form id="rsvp-form">
+
+                    <div class="form-group">
+                        <label for="name">
+                            Nome e cognome
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Il tuo nome"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Parteciperai?
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="attendance"
+                                    value="yes"
+                                    required
+                                >
+                                <span>Sì, non vedo l'ora</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="attendance"
+                                    value="no"
+                                >
+                                <span>Purtroppo non potrò esserci</span>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="guests">
+                            Numero di persone
+                        </label>
+
+                        <select id="guests" name="guests">
+
+                            <option value="1">1 persona</option>
+                            <option value="2">2 persone</option>
+                            <option value="3">3 persone</option>
+                            <option value="4">4 persone</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="notes">
+                            Allergie, intolleranze o note
+                        </label>
+
+                        <textarea
+                            id="notes"
+                            name="notes"
+                            rows="4"
+                            placeholder="Scrivici qui..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button type="submit" class="primary-button">
+                        Conferma la presenza
+                    </button>
+
+                </form>
+
+                <div
+                    id="rsvp-success"
+                    class="rsvp-success"
+                    hidden
+                >
+                    <span>♡</span>
+
+                    <h3>Grazie!</h3>
+
+                    <p>
+                        Non vediamo l'ora di festeggiare
+                        insieme a voi.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DRESS CODE -->
+        <section class="dress-code reveal">
+
+            <p class="section-label">DRESS CODE</p>
+
+            <h2>Elegant</h2>
+
+            <p>
+                Vestitevi come vi sentite più belli.
+                Noi ci metteremo il nostro abito migliore.
+            </p>
+
+        </section>
+
+
+        <!-- INFO -->
+        <section class="info reveal">
+
+            <p class="section-label">INFORMAZIONI UTILI</p>
+
+            <h2>Tutto quello che<br>vi serve sapere</h2>
+
+            <div class="info-grid">
+
+                <article class="info-card">
+                    <span>⌂</span>
+                    <h3>Come arrivare</h3>
+                    <p>
+                        Indicazioni, parcheggio
+                        e informazioni sulla location.
+                    </p>
+                    <a href="#" class="text-link">
+                        Apri la mappa →
+                    </a>
+                </article>
+
+
+                <article class="info-card">
+                    <span>♧</span>
+                    <h3>Dove dormire</h3>
+                    <p>
+                        Alcune strutture consigliate
+                        per chi viene da fuori.
+                    </p>
+                    <a href="#" class="text-link">
+                        Scopri gli hotel →
+                    </a>
+                </article>
+
+
+                <article class="info-card">
+                    <span>♡</span>
+                    <h3>Navetta</h3>
+                    <p>
+                        Informazioni sugli eventuali
+                        trasferimenti.
+                    </p>
+                </article>
+
+
+                <article class="info-card">
+                    <span>?</span>
+                    <h3>FAQ</h3>
+                    <p>
+                        Le risposte alle domande
+                        più frequenti.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- FAQ -->
+        <section class="faq reveal">
+
+            <p class="section-label">FAQ</p>
+
+            <h2>Domande frequenti</h2>
+
+            <div class="faq-list">
+
+                <details>
+                    <summary>
+                        A che ora devo arrivare?
+                        <span>+</span>
+                    </summary>
+
+                    <p>
+                        Inseriremo qui tutte le informazioni
+                        sull'orario di arrivo.
+                    </p>
+                </details>
+
+
+                <details>
+                    <summary>
+                        C'è un parcheggio?
+                        <span>+</span>
+                    </summary>
+
+                    <p>
+                        Inseriremo qui le informazioni
+                        sui parcheggi disponibili.
+                    </p>
+                </details>
+
+
+                <details>
+                    <summary>
+                        È prevista una navetta?
+                        <span>+</span>
+                    </summary>
+
+                    <p>
+                        Tutte le informazioni sulla navetta
+                        saranno disponibili qui.
+                    </p>
+                </details>
+
+
+                <details>
+                    <summary>
+                        Posso portare un accompagnatore?
+                        <span>+</span>
+                    </summary>
+
+                    <p>
+                        Verificare le indicazioni degli sposi.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+
+        <!-- GIFT -->
+        <section class="gift reveal">
+
+            <div class="botanical">❧</div>
+
+            <p class="section-label">UN PENSIERO PER NOI</p>
+
+            <h2>La vostra presenza<br>è il regalo più bello.</h2>
+
+            <p>
+                Se desiderate accompagnarci anche
+                nel nostro prossimo viaggio,
+                troverete qui tutte le informazioni.
+            </p>
+
+            <a href="#" class="secondary-button">
+                Scopri la lista nozze
+            </a>
+
+        </section>
+
+
+        <!-- FINAL -->
+        <section class="final-section">
+
+            <div class="final-flower">✿</div>
+
+            <p class="section-label">CON AMORE</p>
+
+            <h2>
+                Federica<br>
+                <span>&</span><br>
+                Serenella
+            </h2>
+
+            <p class="final-date">
+                21 · 06 · 2027
+            </p>
+
+            <p class="final-message">
+                Grazie per essere parte<br>
+                del nostro giorno speciale.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Federica & Serenella
+        </p>
+
+        <span>
+            21 · 06 · 2027
+        </span>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
