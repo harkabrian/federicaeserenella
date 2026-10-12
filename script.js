@@ -18,9 +18,12 @@ form?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const endpoint = form.dataset.formspreeEndpoint?.trim();
   if (!endpoint) {
-    alert("Il modulo RSVP è pronto, ma non è ancora collegato al servizio di raccolta risposte.");
+    alert("Il modulo RSVP non è ancora collegato al servizio di raccolta risposte.");
     return;
   }
+  const honeypot = form.elements.namedItem("website");
+  if (honeypot?.value) return;
+
   const button = form.querySelector('button[type="submit"]');
   const originalText = button.textContent;
   button.disabled = true;
