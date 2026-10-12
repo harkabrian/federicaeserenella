@@ -26,10 +26,14 @@ form?.addEventListener("submit", async (event) => {
   button.disabled = true;
   button.textContent = "Invio…";
   try {
-    const response = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
-    if (!response.ok) throw new Error();
+    const response = await fetch(endpoint, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" }
+    });
+    if (!response.ok) throw new Error("RSVP submission failed");
     form.reset();
-    form.querySelectorAll("input, select, textarea").forEach((el) => (el.disabled = true));
+    form.querySelectorAll("input:not([type='hidden']), select, textarea").forEach((el) => (el.disabled = true));
     button.hidden = true;
     success.hidden = false;
     success.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -43,12 +47,18 @@ form?.addEventListener("submit", async (event) => {
 document.querySelectorAll(".faq details").forEach((detail) => {
   detail.addEventListener("toggle", () => {
     if (!detail.open) return;
-    document.querySelectorAll(".faq details").forEach((other) => { if (other !== detail) other.open = false; });
+    document.querySelectorAll(".faq details").forEach((other) => {
+      if (other !== detail) other.open = false;
+    });
   });
 });
 
 copyIban?.addEventListener("click", async () => {
-  try { await navigator.clipboard.writeText(copyIban.dataset.iban); copyFeedback.textContent = "IBAN copiato."; }
-  catch { copyFeedback.textContent = "Seleziona e copia l'IBAN manualmente."; }
+  try {
+    await navigator.clipboard.writeText(copyIban.dataset.iban);
+    copyFeedback.textContent = "IBAN copiato.";
+  } catch {
+    copyFeedback.textContent = "Seleziona e copia l'IBAN manualmente.";
+  }
   setTimeout(() => (copyFeedback.textContent = ""), 2500);
 });
