@@ -1,0 +1,36 @@
+/* RSVP redesign based on the supplied visual reference */
+.rsvp-section{padding:7rem max(1rem,4vw);background:#f2eee4;position:relative;overflow:hidden}
+.rsvp-section::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 8%,rgba(168,187,162,.18),transparent 25%),radial-gradient(circle at 90% 78%,rgba(221,194,183,.14),transparent 28%);pointer-events:none}
+.rsvp-wrap{position:relative;z-index:1;display:block;max-width:900px;margin:auto}
+.rsvp-note{display:none}
+.rsvp-card{background:rgba(255,253,248,.94);padding:3.8rem clamp(1.1rem,4vw,3.2rem) 2.2rem;box-shadow:0 25px 80px rgba(67,73,63,.13);border-radius:28px;position:relative;overflow:hidden}
+.rsvp-card::before{content:"";position:absolute;inset:12px;border:1px solid rgba(83,102,83,.13);border-radius:20px;pointer-events:none}
+.rsvp-card::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.34),transparent 38%);pointer-events:none}
+.rsvp-card-top{position:relative;z-index:2;display:block;text-align:center;margin:0 0 1.4rem;font:400 clamp(3rem,7vw,5.1rem)/.9 var(--script);color:var(--sage-dark)}
+.rsvp-card-top span:first-child{display:block}
+.rsvp-card-top span:last-child{display:none}
+.rsvp-card form{position:relative;z-index:2;display:grid;gap:1rem}
+.rsvp-intro{text-align:center;color:#596057;font:400 1rem/1.45 var(--serif);max-width:650px;margin:0 auto 1.8rem}
+.rsvp-group{border:1px solid rgba(83,102,83,.17);border-radius:16px;padding:1.05rem 1.15rem;background:rgba(255,255,255,.26)}
+.rsvp-group-title{display:block;font:600 1.2rem/1.1 var(--serif);margin:0 0 .25rem;color:#2f372f}
+.rsvp-group-help{display:block;color:#747a72;font:400 .8rem/1.4 var(--serif);margin-bottom:.8rem}
+.rsvp-card .field-label{display:block;font:600 .88rem var(--serif);letter-spacing:0;text-transform:none;margin:0 0 .45rem;color:#2f372f}
+.rsvp-card input[type="text"],.rsvp-card select,.rsvp-card textarea{display:block;width:100%;margin:0;border:1px solid rgba(83,102,83,.18);border-radius:10px;background:rgba(255,255,255,.55);padding:.72rem .85rem;color:var(--ink);outline:0;box-shadow:none;font:400 .92rem var(--serif)}
+.rsvp-card input[type="text"]:focus,.rsvp-card select:focus,.rsvp-card textarea:focus{border-color:var(--sage-dark);box-shadow:0 0 0 3px rgba(168,187,162,.18)}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.rsvp-card .choice{display:flex;align-items:center;gap:.7rem;margin:0!important;padding:.78rem .9rem;border:1px solid rgba(83,102,83,.18);border-radius:10px;background:rgba(255,255,255,.38);font:400 .92rem var(--serif)!important;color:#343b34}
+.rsvp-card .choice:has(input:checked){background:rgba(168,187,162,.22);border-color:rgba(83,102,83,.42)}
+.rsvp-card .choice input{appearance:none;width:23px!important;height:23px;margin:0!important;border:1.5px solid #899184;border-radius:50%;padding:0;background:#fff;flex:0 0 23px}
+.rsvp-card .choice input:checked{border:7px solid #697862}
+.names-list{display:grid;gap:.55rem}
+.names-row{display:grid;grid-template-columns:1fr auto;gap:.55rem;align-items:center}
+.names-row button{width:34px;height:34px;border:0;background:transparent;color:#7d847b;font-size:1.25rem;cursor:pointer}
+.add-name{border:0;border-radius:999px;background:rgba(168,187,162,.24);color:#5b6658;padding:.55rem .85rem;font:500 .78rem var(--serif);cursor:pointer;margin-top:.65rem}
+.add-name span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#697862;color:#fff;margin-right:.35rem}
+.inline-choices{display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;margin-top:.8rem}
+.inline-choices .choice{border:0!important;background:transparent!important;padding:.15rem 0!important}
+.rsvp-card textarea{min-height:78px;resize:vertical}
+.form-button{margin-top:.25rem;border:0;border-radius:999px;background:#5d6c56;color:#fff;padding:1rem 1.2rem;text-transform:uppercase;letter-spacing:.18em;font-size:.66rem;cursor:pointer;display:flex;justify-content:center;gap:1rem;transition:.25s;font-weight:500}
+.form-button:hover{transform:translateY(-2px);background:#4d5b48}
+.success{position:relative;z-index:2;text-align:center;border-radius:12px}
+@media(max-width:560px){.rsvp-section{padding:4rem .75rem}.rsvp-card{padding:3.2rem .85rem 1.4rem;border-radius:22px}.rsvp-card::before{inset:8px;border-radius:16px}.choice-grid{grid-template-columns:1fr}.rsvp-card-top{font-size:3.15rem}.rsvp-group{padding:.95rem}.rsvp-group-title{font-size:1.08rem}}
