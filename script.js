@@ -6,6 +6,11 @@ const progressBar = document.getElementById("progressBar");
 const heroPhoto = document.querySelector(".hero-photo");
 const nav = document.querySelector(".site-nav");
 
+const rsvpStyles = document.createElement("link");
+rsvpStyles.rel = "stylesheet";
+rsvpStyles.href = "rsvp.css";
+document.head.appendChild(rsvpStyles);
+
 function updateCountdown() {
   const target = new Date("2027-05-22T11:45:00+02:00").getTime();
   const diff = Math.max(0, target - Date.now());
@@ -69,6 +74,50 @@ if ("IntersectionObserver" in window) {
   document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
 }
 
+const guestCount = document.getElementById("guestCount");
+const namesList = document.getElementById("namesList");
+const addName = document.getElementById("addName");
+
+function renderNameFields() {
+  if (!guestCount || !namesList) return;
+  const count = Number(guestCount.value || 1);
+  const current = [...namesList.querySelectorAll("input[name='participant_names[]']")].map((input) => input.value);
+  namesList.innerHTML = "";
+  for (let i = 0; i < count; i += 1) {
+    const row = document.createElement("div");
+    row.className = "names-row";
+    const input = document.createElement("input");
+    input.type = "text";
+    input.name = "participant_names[]";
+    input.placeholder = "Nome e cognome";
+    input.required = true;
+    input.value = current[i] || "";
+    row.appendChild(input);
+    if (count > 1) {
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.setAttribute("aria-label", `Rimuovi partecipante ${i + 1}`);
+      remove.textContent = "⌫";
+      remove.addEventListener("click", () => {
+        if (guestCount.value > 1) {
+          guestCount.value = String(Math.max(1, Number(guestCount.value) - 1));
+          renderNameFields();
+        }
+      });
+      row.appendChild(remove);
+    }
+    namesList.appendChild(row);
+  }
+}
+renderNameFields();
+guestCount?.addEventListener("change", renderNameFields);
+addName?.addEventListener("click", () => {
+  if (!guestCount) return;
+  const next = Math.min(4, Number(guestCount.value || 1) + 1);
+  guestCount.value = String(next);
+  renderNameFields();
+});
+
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const endpoint = form.dataset.formspreeEndpoint?.trim();
@@ -91,6 +140,7 @@ form?.addEventListener("submit", async (event) => {
     });
     if (!response.ok) throw new Error("RSVP submission failed");
     form.reset();
+    renderNameFields();
     form.querySelectorAll("input:not([type='hidden']), select, textarea").forEach((el) => (el.disabled = true));
     button.hidden = true;
     success.hidden = false;
