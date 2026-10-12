@@ -2,17 +2,72 @@ const form = document.getElementById("rsvpForm");
 const success = document.getElementById("successMessage");
 const copyIban = document.getElementById("copyIban");
 const copyFeedback = document.getElementById("copyFeedback");
+const progressBar = document.getElementById("progressBar");
+const heroPhoto = document.querySelector(".hero-photo");
+const nav = document.querySelector(".site-nav");
 
 function updateCountdown() {
   const target = new Date("2027-05-22T11:45:00+02:00").getTime();
   const diff = Math.max(0, target - Date.now());
-  document.getElementById("days").textContent = Math.floor(diff / 86400000);
-  document.getElementById("hours").textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
-  document.getElementById("minutes").textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
-  document.getElementById("seconds").textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
+  const days = document.getElementById("days");
+  const hours = document.getElementById("hours");
+  const minutes = document.getElementById("minutes");
+  const seconds = document.getElementById("seconds");
+  if (!days) return;
+  days.textContent = Math.floor(diff / 86400000);
+  hours.textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
+  minutes.textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+  seconds.textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+function loadPhotoSlots() {
+  document.querySelectorAll("[data-photo]").forEach((element) => {
+    const path = element.dataset.photo;
+    const image = new Image();
+    image.onload = () => {
+      if (element.classList.contains("hero-photo")) {
+        element.style.backgroundImage = `url("${path}")`;
+      } else {
+        element.style.setProperty("--bg-image", `url("${path}")`);
+        if (element.classList.contains("story-photo")) element.style.backgroundImage = `url("${path}")`;
+      }
+      element.classList.add("has-photo");
+    };
+    image.src = path;
+  });
+}
+loadPhotoSlots();
+
+let ticking = false;
+function updateScrollEffects() {
+  const scrollTop = window.scrollY;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+  if (progressBar) progressBar.style.width = `${progress}%`;
+  if (nav) nav.style.background = scrollTop > 60 ? "rgba(30,42,33,.62)" : "rgba(30,42,33,.2)";
+  if (heroPhoto && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    heroPhoto.style.transform = `translateY(${scrollTop * 0.12}px) scale(1.04)`;
+  }
+  ticking = false;
+}
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    window.requestAnimationFrame(updateScrollEffects);
+    ticking = true;
+  }
+}, { passive: true });
+updateScrollEffects();
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+}
 
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -47,10 +102,10 @@ form?.addEventListener("submit", async (event) => {
   }
 });
 
-document.querySelectorAll(".faq details").forEach((detail) => {
+document.querySelectorAll(".faq-list details").forEach((detail) => {
   detail.addEventListener("toggle", () => {
     if (!detail.open) return;
-    document.querySelectorAll(".faq details").forEach((other) => {
+    document.querySelectorAll(".faq-list details").forEach((other) => {
       if (other !== detail) other.open = false;
     });
   });
