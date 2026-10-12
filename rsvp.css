@@ -10,7 +10,7 @@
 .rsvp-card-top span:first-child{display:block}
 .rsvp-card-top span:last-child{display:none}
 .rsvp-card form{position:relative;z-index:2;display:grid;gap:1rem}
-.rsvp-intro{text-align:center;color:#596057;font:400 1rem/1.45 var(--serif);max-width:650px;margin:0 auto 1.8rem}
+.rsvp-intro{text-align:center;color:#3d423b;font:400 1rem/1.45 var(--serif);max-width:650px;margin:0 auto 1.8rem}
 .rsvp-group{border:1px solid rgba(83,102,83,.17);border-radius:16px;padding:1.05rem 1.15rem;background:rgba(255,255,255,.26)}
 .rsvp-group-title{display:block;font:600 1.2rem/1.1 var(--serif);margin:0 0 .25rem;color:#2f372f}
 .rsvp-group-help{display:block;color:#747a72;font:400 .8rem/1.4 var(--serif);margin-bottom:.8rem}
