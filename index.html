@@ -17,7 +17,7 @@
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
-<!--Prec-->
+
   <header class="hero" id="top">
     <div class="hero-photo" role="img" aria-label="Fotografia degli sposi da inserire"></div>
     <div class="hero-overlay"></div>
@@ -55,6 +55,18 @@
         <p class="eyebrow">Segnatevi la data</p>
         <p class="big-date">22 <span>MAGGIO</span> 2027</p>
         <p class="quote">“Liberi di essere”</p>
+      </div>
+    </section>
+
+    <section class="countdown section" aria-label="Conto alla rovescia">
+      <div class="countdown-inner">
+        <p class="eyebrow">Manca sempre meno</p>
+        <div class="countdown-grid">
+          <div><strong id="days">—</strong><span>giorni</span></div>
+          <div><strong id="hours">—</strong><span>ore</span></div>
+          <div><strong id="minutes">—</strong><span>minuti</span></div>
+          <div><strong id="seconds">—</strong><span>secondi</span></div>
+        </div>
       </div>
     </section>
 
@@ -106,7 +118,7 @@
         <h2>Conferma la tua presenza</h2>
         <p class="lead">Per condividere con noi questo giorno speciale, compila il modulo di conferma entro il <strong>15 aprile 2027</strong>.</p>
 
-        <form id="rsvpForm">
+        <form id="rsvpForm" data-formspree-endpoint="">
           <label>
             Nome e cognome
             <input name="name" type="text" autocomplete="name" required placeholder="Come ti chiami?">
@@ -134,7 +146,7 @@
           </label>
 
           <button class="button" type="submit">Invia conferma</button>
-          <p class="form-note">Il modulo è predisposto per il collegamento a un servizio RSVP. Fino all'attivazione del backend, non invia dati.</p>
+          <p class="form-note">Il modulo è pronto per il collegamento a un servizio RSVP. Attiveremo l’invio reale prima della pubblicazione.</p>
           <div class="success" id="successMessage" hidden>
             <strong>Grazie! 🤍</strong>
             <span>Non vediamo l’ora di festeggiare con voi.</span>
@@ -193,7 +205,7 @@
   </main>
 
   <footer>
-    <p>Federica &amp; Serenella · 22 maggio 2027</p>
+    <p>Federica &amp; Serenella · 22 maggio 2027</p><span>Pagina privata condivisa tramite invito</span>
     <a href="#top">Torna su ↑</a>
   </footer>
 
