@@ -81,6 +81,10 @@ const addName = document.getElementById("addName");
 const attendanceFields = form ? [...form.querySelectorAll('input[name="attendance"]')] : [];
 const detailGroups = form ? [...form.querySelectorAll("[data-rsvp-detail]")] : [];
 
+function isAttending() {
+  return form?.querySelector('input[name="attendance"]:checked')?.value === "si";
+}
+
 function renderNameFields() {
   if (!guestCount || !namesList) return;
   const count = Number(guestCount.value || 1);
@@ -94,6 +98,7 @@ function renderNameFields() {
     input.name = "participant_names[]";
     input.placeholder = "Nome e cognome";
     input.required = true;
+    input.disabled = !isAttending();
     input.value = current[i] || "";
     row.appendChild(input);
     if (count > 1) {
@@ -101,6 +106,7 @@ function renderNameFields() {
       remove.type = "button";
       remove.setAttribute("aria-label", `Rimuovi partecipante ${i + 1}`);
       remove.textContent = "×";
+      remove.disabled = !isAttending();
       remove.addEventListener("click", () => {
         guestCount.value = String(Math.max(1, Number(guestCount.value) - 1));
         renderNameFields();
@@ -113,7 +119,7 @@ function renderNameFields() {
 
 function syncRsvpMode() {
   if (!form || !attendanceFields.length) return;
-  const attending = form.querySelector('input[name="attendance"]:checked')?.value === "si";
+  const attending = isAttending();
   detailGroups.forEach((group) => {
     group.hidden = !attending;
     group.querySelectorAll("input, select, textarea, button").forEach((field) => {
@@ -127,7 +133,7 @@ function syncRsvpMode() {
 renderNameFields();
 guestCount?.addEventListener("change", renderNameFields);
 addName?.addEventListener("click", () => {
-  if (!guestCount) return;
+  if (!guestCount || !isAttending()) return;
   const next = Math.min(7, Number(guestCount.value || 1) + 1);
   guestCount.value = String(next);
   renderNameFields();
