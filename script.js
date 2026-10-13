@@ -1,6 +1,6 @@
 const form = document.getElementById("rsvpForm");
 const success = document.getElementById("successMessage1");
-success.style.display="none";
+const formError = document.getElementById("formError");
 const copyIban = document.getElementById("copyIban");
 const copyFeedback = document.getElementById("copyFeedback");
 const progressBar = document.getElementById("progressBar");
@@ -78,6 +78,8 @@ if ("IntersectionObserver" in window) {
 const guestCount = document.getElementById("guestCount");
 const namesList = document.getElementById("namesList");
 const addName = document.getElementById("addName");
+const attendanceFields = form ? [...form.querySelectorAll('input[name="attendance"]')] : [];
+const detailGroups = form ? [...form.querySelectorAll("[data-rsvp-detail]")] : [];
 
 function renderNameFields() {
   if (!guestCount || !namesList) return;
@@ -98,26 +100,40 @@ function renderNameFields() {
       const remove = document.createElement("button");
       remove.type = "button";
       remove.setAttribute("aria-label", `Rimuovi partecipante ${i + 1}`);
-      remove.textContent = "⌫";
+      remove.textContent = "×";
       remove.addEventListener("click", () => {
-        if (guestCount.value > 1) {
-          guestCount.value = String(Math.max(1, Number(guestCount.value) - 1));
-          renderNameFields();
-        }
+        guestCount.value = String(Math.max(1, Number(guestCount.value) - 1));
+        renderNameFields();
       });
       row.appendChild(remove);
     }
     namesList.appendChild(row);
   }
 }
+
+function syncRsvpMode() {
+  if (!form || !attendanceFields.length) return;
+  const attending = form.querySelector('input[name="attendance"]:checked')?.value === "si";
+  detailGroups.forEach((group) => {
+    group.hidden = !attending;
+    group.querySelectorAll("input, select, textarea, button").forEach((field) => {
+      field.disabled = !attending;
+    });
+  });
+  if (guestCount && !attending) guestCount.value = "1";
+  renderNameFields();
+}
+
 renderNameFields();
 guestCount?.addEventListener("change", renderNameFields);
 addName?.addEventListener("click", () => {
   if (!guestCount) return;
-  const next = Math.min(4, Number(guestCount.value || 1) + 1);
+  const next = Math.min(7, Number(guestCount.value || 1) + 1);
   guestCount.value = String(next);
   renderNameFields();
 });
+attendanceFields.forEach((field) => field.addEventListener("change", syncRsvpMode));
+syncRsvpMode();
 
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -129,25 +145,47 @@ form?.addEventListener("submit", async (event) => {
   const honeypot = form.elements.namedItem("website");
   if (honeypot?.value) return;
 
+  if (formError) formError.hidden = true;
   const button = form.querySelector('button[type="submit"]');
   const originalText = button.textContent;
   button.disabled = true;
-  button.textContent = "Inviato";
+  button.textContent = "Invio…";
+
   try {
     const response = await fetch(endpoint, {
       method: "POST",
       body: new FormData(form),
       headers: { Accept: "application/json" }
     });
-    if (!response.ok) throw new Error("RSVP submission failed");
+
+    if (!response.ok) {
+      let message = "Non siamo riuscite a inviare la conferma. Riprova tra poco.";
+      try {
+        const data = await response.json();
+        if (Array.isArray(data?.errors) && data.errors.length) {
+          message = data.errors.map((error) => error.message).join(" ");
+        }
+      } catch {}
+      throw new Error(message);
+    }
+
     form.reset();
     renderNameFields();
     form.querySelectorAll("input:not([type='hidden']), select, textarea").forEach((el) => (el.disabled = true));
     button.hidden = true;
-    success.style.display="block";
-    success.scrollIntoView({ behavior: "smooth", block: "center" });
-  } catch {
-    alert("Non siamo riuscite a inviare la conferma. Riprova tra poco.");
+    detailGroups.forEach((group) => (group.hidden = true));
+    if (formError) formError.hidden = true;
+    if (success) {
+      success.hidden = false;
+      success.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  } catch (error) {
+    if (formError) {
+      formError.textContent = error?.message || "Non siamo riuscite a inviare la conferma. Riprova tra poco.";
+      formError.hidden = false;
+    } else {
+      alert(error?.message || "Non siamo riuscite a inviare la conferma. Riprova tra poco.");
+    }
     button.disabled = false;
     button.textContent = originalText;
   }
