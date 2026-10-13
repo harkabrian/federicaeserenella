@@ -12,6 +12,7 @@
 .rsvp-card form{position:relative;z-index:2;display:grid;gap:1rem}
 .rsvp-intro{text-align:center;color:#3d423b;font:400 1rem/1.45 var(--serif);max-width:650px;margin:0 auto 1.8rem}
 .rsvp-group{border:1px solid rgba(83,102,83,.17);border-radius:16px;padding:1.05rem 1.15rem;background:rgba(255,255,255,.26)}
+.rsvp-group[hidden]{display:none}
 .rsvp-group-title{display:block;font:600 1.2rem/1.1 var(--serif);margin:0 0 .25rem;color:#2f372f}
 .rsvp-group-help{display:block;color:#747a72;font:400 .8rem/1.4 var(--serif);margin-bottom:.8rem}
 .rsvp-card .field-label{display:block;font:600 .88rem var(--serif);letter-spacing:0;text-transform:none;margin:0 0 .45rem;color:#2f372f}
@@ -24,13 +25,19 @@
 .rsvp-card .choice input:checked{border:7px solid #697862}
 .names-list{display:grid;gap:.55rem}
 .names-row{display:grid;grid-template-columns:1fr auto;gap:.55rem;align-items:center}
-.names-row button{width:34px;height:34px;border:0;background:transparent;color:#7d847b;font-size:1.25rem;cursor:pointer}
+.names-row button{width:34px;height:34px;border:0;background:transparent;color:#7d847b;font-size:1.35rem;cursor:pointer;border-radius:50%}
+.names-row button:hover{background:rgba(168,187,162,.18)}
 .add-name{border:0;border-radius:999px;background:rgba(168,187,162,.24);color:#5b6658;padding:.55rem .85rem;font:500 .78rem var(--serif);cursor:pointer;margin-top:.65rem}
 .add-name span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#697862;color:#fff;margin-right:.35rem}
 .inline-choices{display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;margin-top:.8rem}
 .inline-choices .choice{border:0!important;background:transparent!important;padding:.15rem 0!important}
 .rsvp-card textarea{min-height:78px;resize:vertical}
+.form-error{padding:.85rem 1rem;border:1px solid rgba(146,77,69,.28);border-radius:12px;background:rgba(146,77,69,.07);color:#7b4039;text-align:center;font:500 .9rem/1.35 var(--serif)}
+.form-error[hidden]{display:none}
 .form-button{margin-top:.25rem;border:0;border-radius:999px;background:#5d6c56;color:#fff;padding:1rem 1.2rem;text-transform:uppercase;letter-spacing:.18em;font-size:.66rem;cursor:pointer;display:flex;justify-content:center;gap:1rem;transition:.25s;font-weight:500}
 .form-button:hover{transform:translateY(-2px);background:#4d5b48}
 .success{position:relative;z-index:2;text-align:center;border-radius:12px}
+.rsvp-success{display:grid;gap:.3rem;padding:2.2rem 1rem 1rem;margin-top:.25rem;background:rgba(168,187,162,.13);border:1px solid rgba(83,102,83,.14);color:#344034;font:400 1.05rem/1.4 var(--serif)}
+.rsvp-success strong{font:400 clamp(2.7rem,6vw,4.3rem)/.9 var(--script);color:var(--sage-dark)}
+.rsvp-success span:last-child{color:#667060}
 @media(max-width:560px){.rsvp-section{padding:4rem .75rem}.rsvp-card{padding:3.2rem .85rem 1.4rem;border-radius:22px}.rsvp-card::before{inset:8px;border-radius:16px}.choice-grid{grid-template-columns:1fr}.rsvp-card-top{font-size:3.15rem}.rsvp-group{padding:.95rem}.rsvp-group-title{font-size:1.08rem}}
