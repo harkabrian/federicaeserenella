@@ -1,5 +1,6 @@
 const form = document.getElementById("rsvpForm");
 const success = document.getElementById("successMessage1");
+success.style.dysplay="none";
 const copyIban = document.getElementById("copyIban");
 const copyFeedback = document.getElementById("copyFeedback");
 const progressBar = document.getElementById("progressBar");
@@ -143,7 +144,7 @@ form?.addEventListener("submit", async (event) => {
     renderNameFields();
     form.querySelectorAll("input:not([type='hidden']), select, textarea").forEach((el) => (el.disabled = true));
     button.hidden = true;
-    success.hidden = false;
+    success.style.dysplay="block";
     success.scrollIntoView({ behavior: "smooth", block: "center" });
   } catch {
     alert("Non siamo riuscite a inviare la conferma. Riprova tra poco.");
