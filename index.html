@@ -9,6 +9,11 @@
   <meta property="og:description" content="22 maggio 2027 · Agriturismo Crealto · Cardona (AL)">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
+  <meta property="og:image" content="images/hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Federica & Serenella — Il nostro matrimonio">
+  <meta name="twitter:description" content="22 maggio 2027 · Agriturismo Crealto · Cardona (AL)">
+  <meta name="twitter:image" content="images/hero.jpg">
   <title>Federica & Serenella · 22 maggio 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,13 +47,14 @@
         <input type="hidden" name="_subject" value="RSVP matrimonio Federica &amp; Serenella">
         <input class="honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="rsvp-group"><span class="rsvp-group-title">Parteciperai al nostro matrimonio?</span><div class="choice-grid"><label class="choice"><input type="radio" name="attendance" value="si" required><span>Sì, con piacere!</span></label><label class="choice"><input type="radio" name="attendance" value="no"><span>Purtroppo non potrò partecipare</span></label></div></div>
-        <div class="rsvp-group"><span class="rsvp-group-title">Quante persone sarete?</span><span class="rsvp-group-help">Seleziona il numero di partecipanti.</span><select name="guests" id="guestCount" required><option value="1">1 persona</option><option value="2">2 persone</option><option value="3">3 persone</option><option value="4">4 persone</option><option value="5">5 persone</option><option value="6">6 persone</option><option value="7">7 persone</option></select></div>
-        <div class="rsvp-group"><span class="rsvp-group-title">Nomi dei partecipanti</span><span class="rsvp-group-help">Inserisci i nomi e cognomi di tutti i partecipanti (te compreso).</span><div class="names-list" id="namesList"></div><button class="add-name" type="button" id="addName"><span>+</span> Aggiungi un altro partecipante</button></div>
-        <div class="rsvp-group"><span class="rsvp-group-title">Sono presenti bambini?</span><span class="rsvp-group-help">Se sì, indica l'età.</span><div class="choice-grid"><label class="choice"><input type="radio" name="children" value="si"><span>Sì</span></label><label class="choice"><input type="radio" name="children" value="no"><span>No</span></label></div><label class="field-label" for="childrenAge">Età del/i bambino/i</label><input id="childrenAge" type="text" name="children_age" placeholder="Es. 4 e 7 anni"><div class="inline-choices"><span class="field-label">Avete bisogno di seggioloni?</span><label class="choice"><input type="radio" name="highchair" value="si"><span>Sì</span></label><label class="choice"><input type="radio" name="highchair" value="no"><span>No</span></label></div></div>
-        <div class="rsvp-group"><label class="rsvp-group-title" for="dietary">Intolleranze o esigenze alimentari</label><span class="rsvp-group-help">Indica eventuali intolleranze, allergie o esigenze alimentari.</span><textarea id="dietary" name="dietary" rows="2" placeholder="Scrivi qui…"></textarea></div>
-        <div class="rsvp-group"><label class="rsvp-group-title" for="notes">Note aggiuntive <span style="font-weight:400">(facoltativo)</span></label><span class="rsvp-group-help">Se c'è altro che vorresti comunicarci.</span><textarea id="notes" name="notes" rows="2" placeholder="Scrivi qui…"></textarea></div>
+        <div class="rsvp-group" data-rsvp-detail><span class="rsvp-group-title">Quante persone sarete?</span><span class="rsvp-group-help">Seleziona il numero di partecipanti.</span><select name="guests" id="guestCount" required><option value="1">1 persona</option><option value="2">2 persone</option><option value="3">3 persone</option><option value="4">4 persone</option><option value="5">5 persone</option><option value="6">6 persone</option><option value="7">7 persone</option></select></div>
+        <div class="rsvp-group" data-rsvp-detail><span class="rsvp-group-title">Nomi dei partecipanti</span><span class="rsvp-group-help">Inserisci i nomi e cognomi di tutti i partecipanti (te compreso).</span><div class="names-list" id="namesList"></div><button class="add-name" type="button" id="addName"><span>+</span> Aggiungi un altro partecipante</button></div>
+        <div class="rsvp-group" data-rsvp-detail><span class="rsvp-group-title">Sono presenti bambini?</span><span class="rsvp-group-help">Se sì, indica l'età.</span><div class="choice-grid"><label class="choice"><input type="radio" name="children" value="si"><span>Sì</span></label><label class="choice"><input type="radio" name="children" value="no"><span>No</span></label></div><label class="field-label" for="childrenAge">Età del/i bambino/i</label><input id="childrenAge" type="text" name="children_age" placeholder="Es. 4 e 7 anni"><div class="inline-choices"><span class="field-label">Avete bisogno di seggioloni?</span><label class="choice"><input type="radio" name="highchair" value="si"><span>Sì</span></label><label class="choice"><input type="radio" name="highchair" value="no"><span>No</span></label></div></div>
+        <div class="rsvp-group" data-rsvp-detail><label class="rsvp-group-title" for="dietary">Intolleranze o esigenze alimentari</label><span class="rsvp-group-help">Indica eventuali intolleranze, allergie o esigenze alimentari.</span><textarea id="dietary" name="dietary" rows="2" placeholder="Scrivi qui…"></textarea></div>
+        <div class="rsvp-group" data-rsvp-detail><label class="rsvp-group-title" for="notes">Note aggiuntive <span style="font-weight:400">(facoltativo)</span></label><span class="rsvp-group-help">Se c'è altro che vorresti comunicarci.</span><textarea id="notes" name="notes" rows="2" placeholder="Scrivi qui…"></textarea></div>
+        <div class="form-error" id="formError" role="alert" hidden></div>
         <button class="form-button" type="submit">Invia la tua risposta <span>→</span></button>
-        <div class="success" id="successMessage1"><span class="span1">Risposta inviata correttamente</span></div>
+        <div class="success rsvp-success" id="successMessage1" role="status" aria-live="polite" hidden><strong>Grazie! 🤍</strong><span>La tua risposta è stata inviata correttamente.</span><span>Non vediamo l’ora di festeggiare con voi.</span></div>
       </form>
     </div></div></section>
 
