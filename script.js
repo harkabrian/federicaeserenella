@@ -131,7 +131,7 @@ form?.addEventListener("submit", async (event) => {
   const button = form.querySelector('button[type="submit"]');
   const originalText = button.textContent;
   button.disabled = true;
-  button.textContent = "Invio…";
+  button.textContent = "Inviato";
   try {
     const response = await fetch(endpoint, {
       method: "POST",
