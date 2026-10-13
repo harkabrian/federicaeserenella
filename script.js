@@ -1,5 +1,6 @@
 const form = document.getElementById("rsvpForm");
 const success = document.getElementById("successMessage1");
+success.style.display="none";
 const formError = document.getElementById("formError");
 const copyIban = document.getElementById("copyIban");
 const copyFeedback = document.getElementById("copyFeedback");
@@ -155,7 +156,7 @@ form?.addEventListener("submit", async (event) => {
   const button = form.querySelector('button[type="submit"]');
   const originalText = button.textContent;
   button.disabled = true;
-  button.textContent = "Invio…";
+  button.textContent = "Inviato";
 
   try {
     const response = await fetch(endpoint, {
@@ -182,7 +183,7 @@ form?.addEventListener("submit", async (event) => {
     detailGroups.forEach((group) => (group.hidden = true));
     if (formError) formError.hidden = true;
     if (success) {
-      success.hidden = false;
+      success.style.display="block";
       success.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   } catch (error) {
