@@ -1,5 +1,5 @@
 const form = document.getElementById("rsvpForm");
-const success = document.getElementById("successMessage");
+const success = document.getElementById("successMessage1");
 const copyIban = document.getElementById("copyIban");
 const copyFeedback = document.getElementById("copyFeedback");
 const progressBar = document.getElementById("progressBar");
