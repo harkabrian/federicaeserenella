@@ -37,7 +37,7 @@
 .form-button{margin-top:.25rem;border:0;border-radius:999px;background:#5d6c56;color:#fff;padding:1rem 1.2rem;text-transform:uppercase;letter-spacing:.18em;font-size:.66rem;cursor:pointer;display:flex;justify-content:center;gap:1rem;transition:.25s;font-weight:500}
 .form-button:hover{transform:translateY(-2px);background:#4d5b48}
 .success{position:relative;z-index:2;text-align:center;border-radius:12px}
-.rsvp-success{display:grid;gap:.3rem;padding:1rem 1rem 1rem;margin-top:.25rem;background:rgba(168,187,162,.13);border:1px solid rgba(83,102,83,.14);color:#344034;font:400 1.05rem/1.4 var(--serif)}
+.rsvp-success{display:grid;gap:.3rem;padding:1rem 1rem 1rem;margin-top:.25rem;background:#40a51f38;border:1px solid rgba(83,102,83,.14);color:#344034;font:400 1.05rem/1.4 var(--serif)}
 .rsvp-success strong{font:400 clamp(2.7rem,6vw,4.3rem)/.9 var(--script);color:var(--sage-dark)}
 .rsvp-success span:last-child{color:#667060}
 @media(max-width:560px){.rsvp-section{padding:4rem .75rem}.rsvp-card{padding:3.2rem .85rem 1.4rem;border-radius:22px}.rsvp-card::before{inset:8px;border-radius:16px}.choice-grid{grid-template-columns:1fr}.rsvp-card-top{font-size:3.15rem}.rsvp-group{padding:.95rem}.rsvp-group-title{font-size:1.08rem}}
