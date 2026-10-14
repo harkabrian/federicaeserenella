@@ -34,9 +34,8 @@ function loadPhotoSlots() {
     const path = element.dataset.photo;
     const image = new Image();
     image.onload = () => {
-      if (element.classList.contains("hero-photo")) {
-        element.style.backgroundImage = `url("${path}")`;
-      } else {
+      if (element.classList.contains("hero-photo")) element.style.backgroundImage = `url("${path}")`;
+      else {
         element.style.setProperty("--bg-image", `url("${path}")`);
         if (element.classList.contains("story-photo")) element.style.backgroundImage = `url("${path}")`;
       }
@@ -54,9 +53,7 @@ function updateScrollEffects() {
   const progress = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
   if (progressBar) progressBar.style.width = `${progress}%`;
   if (nav) nav.style.background = scrollTop > 60 ? "rgba(30,42,33,.62)" : "rgba(30,42,33,.2)";
-  if (heroPhoto && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    heroPhoto.style.transform = `translateY(${scrollTop * 0.12}px) scale(1.04)`;
-  }
+  if (heroPhoto && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) heroPhoto.style.transform = `translateY(${scrollTop * 0.12}px) scale(1.04)`;
   ticking = false;
 }
 window.addEventListener("scroll", () => {
@@ -123,9 +120,7 @@ function syncRsvpMode() {
   const attending = isAttending();
   detailGroups.forEach((group) => {
     group.hidden = !attending;
-    group.querySelectorAll("input, select, textarea, button").forEach((field) => {
-      field.disabled = !attending;
-    });
+    group.querySelectorAll("input, select, textarea, button").forEach((field) => field.disabled = !attending);
   });
   if (guestCount && !attending) guestCount.value = "1";
   renderNameFields();
@@ -135,8 +130,7 @@ renderNameFields();
 guestCount?.addEventListener("change", renderNameFields);
 addName?.addEventListener("click", () => {
   if (!guestCount || !isAttending()) return;
-  const next = Math.min(7, Number(guestCount.value || 1) + 1);
-  guestCount.value = String(next);
+  guestCount.value = String(Math.min(7, Number(guestCount.value || 1) + 1));
   renderNameFields();
 });
 attendanceFields.forEach((field) => field.addEventListener("change", syncRsvpMode));
@@ -144,55 +138,42 @@ syncRsvpMode();
 
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const endpoint = form.dataset.formspreeEndpoint?.trim();
-  if (!endpoint) {
-    alert("Il modulo RSVP non è ancora collegato al servizio di raccolta risposte.");
+  const endpoint = form.dataset.formEndpoint?.trim();
+  const accessKey = form.querySelector('input[name="access_key"]')?.value?.trim();
+  if (!endpoint || !accessKey || accessKey === "INSERISCI_QUI_LA_TUA_ACCESS_KEY") {
+    alert("Il modulo RSVP non è ancora configurato: manca l'Access Key Web3Forms.");
     return;
   }
-  const honeypot = form.elements.namedItem("website");
-  if (honeypot?.value) return;
-
   if (formError) formError.hidden = true;
   const button = form.querySelector('button[type="submit"]');
   const originalText = button.textContent;
   button.disabled = true;
-  button.textContent = "Inviato";
-
+  button.textContent = "Invio…";
   try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      body: new FormData(form),
-      headers: { Accept: "application/json" }
-    });
-
+    const response = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
     if (!response.ok) {
       let message = "Non siamo riuscite a inviare la conferma. Riprova tra poco.";
       try {
         const data = await response.json();
-        if (Array.isArray(data?.errors) && data.errors.length) {
-          message = data.errors.map((error) => error.message).join(" ");
-        }
+        if (Array.isArray(data?.errors) && data.errors.length) message = data.errors.map((error) => error.message).join(" ");
       } catch {}
       throw new Error(message);
     }
-
     form.reset();
     renderNameFields();
-    form.querySelectorAll("input:not([type='hidden']), select, textarea").forEach((el) => (el.disabled = true));
+    form.querySelectorAll("input:not([type='hidden']), select, textarea").forEach((el) => el.disabled = true);
     button.hidden = true;
-    detailGroups.forEach((group) => (group.hidden = true));
+    detailGroups.forEach((group) => group.hidden = true);
     if (formError) formError.hidden = true;
     if (success) {
-      success.style.display="block";
+      success.style.display = "block";
       success.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   } catch (error) {
     if (formError) {
       formError.textContent = error?.message || "Non siamo riuscite a inviare la conferma. Riprova tra poco.";
       formError.hidden = false;
-    } else {
-      alert(error?.message || "Non siamo riuscite a inviare la conferma. Riprova tra poco.");
-    }
+    } else alert(error?.message || "Non siamo riuscite a inviare la conferma. Riprova tra poco.");
     button.disabled = false;
     button.textContent = originalText;
   }
@@ -201,9 +182,7 @@ form?.addEventListener("submit", async (event) => {
 document.querySelectorAll(".faq-list details").forEach((detail) => {
   detail.addEventListener("toggle", () => {
     if (!detail.open) return;
-    document.querySelectorAll(".faq-list details").forEach((other) => {
-      if (other !== detail) other.open = false;
-    });
+    document.querySelectorAll(".faq-list details").forEach((other) => { if (other !== detail) other.open = false; });
   });
 });
 
