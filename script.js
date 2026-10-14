@@ -150,7 +150,29 @@ form?.addEventListener("submit", async (event) => {
   button.disabled = true;
   button.textContent = "Inviato";
   try {
-    const response = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+    const formData = new FormData(form);
+
+    // Web3Forms usa il valore dell'attributo name come etichetta del campo nell'email.
+    // Manteniamo i nomi tecnici nel codice e traduciamo i campi solo nei dati inviati.
+    const fieldLabels = {
+      attendance: "Partecipazione",
+      guests: "Numero di partecipanti",
+      "participant_names[]": "Nome e cognome del partecipante",
+      children: "Bambini presenti",
+      children_age: "Età dei bambini",
+      highchair: "Seggioloni necessari",
+      dietary: "Intolleranze o esigenze alimentari",
+      notes: "Note aggiuntive"
+    };
+
+    Object.entries(fieldLabels).forEach(([technicalName, italianName]) => {
+      const values = formData.getAll(technicalName);
+      if (!values.length) return;
+      formData.delete(technicalName);
+      values.forEach((value) => formData.append(italianName, value));
+    });
+
+    const response = await fetch(endpoint, { method: "POST", body: formData, headers: { Accept: "application/json" } });
     if (!response.ok) {
       let message = "Non siamo riuscite a inviare la conferma. Riprova tra poco.";
       try {
